@@ -1264,15 +1264,15 @@ def PairWiseComparisons(nestedlist):
             Pbest = "Pworst"
             Pworst = "Pbest"
         try:
-            resultscontainer[currentgene][Pbest] = ss.binom_test(
+            resultscontainer[currentgene][Pbest] = ss.binomtest(
                 resultscontainer[currentgene]["max_propairs"],
                 resultscontainer[currentgene]["max_total_pairs"],
-                0.5)
-            resultscontainer[currentgene][Pworst] = ss.binom_test(
+                0.5).pvalue
+            resultscontainer[currentgene][Pworst] = ss.binomtest(
                 resultscontainer[currentgene]["max_total_pairs"] - 
                 resultscontainer[currentgene]["max_antipairs"],
                 resultscontainer[currentgene]["max_total_pairs"],
-                0.5)
+                0.5).pvalue
             resultscontainer[currentgene]["Plowest"] = min(
                 resultscontainer[currentgene]["Pbest"], 
                 resultscontainer[currentgene]["Pworst"])
@@ -1281,7 +1281,7 @@ def PairWiseComparisons(nestedlist):
                 resultscontainer[currentgene]["Pworst"])
         except TypeError:
             sys.exit("There was a problem using " 
-            "scipy.stats.binom_test. Ensure you have a recent "
+            "scipy.stats.binomtest. Ensure you have a recent "
             "distribution of SciPy installed.")
 
         # Loop can break early if filtration includes non-pairwise 
