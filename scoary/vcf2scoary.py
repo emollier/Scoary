@@ -91,7 +91,7 @@ def main():
         help='The VCF file to convert to Roary/Scoary format')
 
     args = parser.parse_args()
-    if args.types is not "ALL":
+    if args.types != "ALL":
         args.types = args.types.split(",")
 
     if os.path.isfile(args.out) and not args.force:
@@ -169,7 +169,7 @@ def main():
                 print("Reached the end of the file")
                 sys.exit(0)
             # Check if line is allowed:
-            if args.types is not "ALL":
+            if args.types != "ALL":
                 vartype = re.search(r'TYPE=(\w+)',line[7]).group(1)
                 if vartype not in args.types:
                     continue
